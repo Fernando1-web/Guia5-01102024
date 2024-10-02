@@ -1,0 +1,41 @@
+﻿@model IEnumerable<SearchResultProductFJMADTO.ProductFJMA>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(item => item.NombreFJMA)
+            </th>
+            <th>
+                @Html.DisplayNameFor(item => item.DescripcionFJMA)
+            </th>
+            <th>
+                @Html.DisplayNameFor(item => item.PrecioFJMA)
+            </th>
+            <th>Acciones</th>
+        </tr>
+    </thead>
+    <tbody>
+        @if (Model != null)
+        {
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.NombreFJMA)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.DescripcionFJMA)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.PrecioFJMA)
+                    </td>
+                    <td>
+                        @Html.ActionLink("Modificar", "Edit", new { id = item.Id }, new { @class = "btn btn-outline-primary" })
+                        @Html.ActionLink("Ver", "Details", new { id = item.Id }, new { @class = "btn btn-outline-secondary" })
+                        @Html.ActionLink("Eliminar", "Delete", new { id = item.Id }, new { @class = "btn btn-outline-danger" })
+                    </td>
+                </tr>
+            }
+        }
+    </tbody>
+</table>

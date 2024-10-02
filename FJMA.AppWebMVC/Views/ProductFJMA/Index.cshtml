@@ -1,0 +1,7 @@
+﻿@model SearchResultProductFJMADTO
+@{
+    ViewData["Title"] = "Index";
+    var modelSearchQuery = ViewBag.SearchQuery as SearchQueryProductFJMADTO;
+}
+<partial name="SearchQuery" model="modelSearchQuery" />
+<partial name="SearchResult" model="Model.Data" />

@@ -1,0 +1,84 @@
+﻿@page "/create-product"
+
+@using FJMA.DTOs.ProductFJMADTOs;
+@using Microsoft.AspNetCore.Components.Forms;
+@using System.ComponentModel.DataAnnotations;
+@using Microsoft.AspNetCore.Components;
+@using FJMA.AppWebBlazor.Data;
+
+@if(isSuccess == false && isError == false)
+{
+    <h3>Crear producto</h3>
+
+    <EditForm Model="product" OnValidSubmit="Create">
+        <div class="row">
+            <div class="col-4">
+                <div class="form-group">
+                    <label for="NombreFJMA">Nombre:</label>
+                    <InputText class="form-control" id="NombreFJMA" @bind-Value="product.NombreFJMA"></InputText>
+                    <ValidationMessage For="() => product.NombreFJMA"></ValidationMessage>
+                </div>
+            </div>
+            <div class="col-4">
+                <div class="form-group">
+                    <label for="DescripcionFJMA">Descripcion:</label>
+                    <InputText class="form-control" id="DescripcionFJMA" @bind-Value="product.DescripcionFJMA"></InputText>
+                    <ValidationMessage For="() => product.DescripcionFJMA"></ValidationMessage>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-4">
+                <div class="form-group">
+                    <label for="PrecioFJMA">Precio:</label>
+                    <InputText class="form-control" id="PrecioFJMA" @bind-Value="product.PrecioFJMA"></InputText>
+                    <ValidationMessage For="() => product.PrecioFJMA"></ValidationMessage>
+                </div>
+            </div>
+        </div>
+        <br />
+        <div class="row">
+            <div class="col-12">
+                <button type="submit" class="btn btn-outline-primary">Guardar</button>
+                <NavLink href="/product-list" class="btn btn-outline-secondary">Cancelar</NavLink>
+            </div>
+        </div>
+    </EditForm>
+}
+else if (isSuccess)
+{
+    product = new CreateProductFJMADTO();
+    isError = false;
+    <p class="alert alert-success">Producto agreagdo con éxito</p>
+    <button type="button" @onclick="GoCreate" class="btn btn-outline-primary">Ir a crear</button>
+    <NavLink href="product-list" class="btn btn-outline-primary">Ir a buscar</NavLink>
+}
+else if (isError)
+{
+    <p class="alert alert-success">Ocurrio un error</p>
+    <NavLink href="product-list" class="btn btn-outline-primary">Aceptar</NavLink>
+}
+
+@code{
+    [Inject]
+    ProductFJMAService productFJMAService { get; set; }
+
+    CreateProductFJMADTO product = new CreateProductFJMADTO();
+    bool isSuccess = false;
+    bool isError = false;
+
+    private async Task Create()
+    {
+        int result = await productFJMAService.Create(product);
+        if (result != 0)
+            isSuccess = true;
+        else
+            isError = true;
+    }
+
+    private void GoCreate()
+    {
+        isSuccess = false;
+        isError = false;
+    }
+}

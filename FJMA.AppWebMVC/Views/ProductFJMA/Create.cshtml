@@ -1,0 +1,54 @@
+﻿@model FJMA.DTOs.ProductFJMADTOs.CreateProductFJMADTO
+
+@{
+    ViewData["Title"] = "Create";
+}
+<style>
+    .form-bordered {
+        border: 2px solid #000; /* Cambia el color y el grosor según tus necesidades */
+        padding: 20px; /* Espaciado interno */
+        border-radius: 5px; /* Esquinas redondeadas, opcional */
+    }
+</style>
+
+<h1>Crear</h1>
+
+<h4>Producto</h4>
+<hr />
+<form asp-action="Create" class="form-bordered">
+    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+    <div class="row">
+        <div class="col-4">
+            <div class="form-group">
+                <label asp-for="NombreFJMA" class="control-label"></label>
+                <input asp-for="NombreFJMA" class="form-control" />
+                <span asp-validation-for="NombreFJMA" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="col-4">
+            <div class="form-group">
+                <label asp-for="DescripcionFJMA" class="control-label"></label>
+                <input asp-for="DescripcionFJMA" class="form-control" />
+                <span asp-validation-for="DescripcionFJMA" class="text-danger"></span>
+            </div>
+        </div>       
+    </div>
+    <div class="row">
+        <div class="col-12">
+            <div class="form-group">
+                <label asp-for="PrecioFJMA" class="control-label"></label>
+                <input asp-for="PrecioFJMA" class="form-control" />
+                <span asp-validation-for="PrecioFJMA" class="text-danger"></span>
+            </div>
+        </div>      
+    </div>
+    <br />
+    <div class="form-group">
+        <input type="submit" value="Crear" class="btn btn-outline-primary" /> | 
+        <a asp-action="Index" class="btn btn-outline-secondary">Regresar</a>
+    </div>
+</form>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
